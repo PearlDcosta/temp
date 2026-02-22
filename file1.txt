@@ -1,5 +1,2 @@
 Hello world
-This is modified
-for future reference
-Last line
-This is edited
+This line was added for git fetch demo
