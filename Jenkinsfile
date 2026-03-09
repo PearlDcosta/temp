@@ -1,31 +1,22 @@
 pipeline {
     agent any
     stages {
-        stage('Fetch') {
+        stage('Checkout') {
             steps {
-                echo 'Fetching from Repo'
                 git 'https://github.com/PearlDcosta/temp.git'
             }
         }
-        stage('build') {
+        stage('Publish') {
             steps {
-                echo 'Building the program'
-                bat 'javac Hello.java'
+                publishHTML([
+                  allowmissing:true,
+                  alwaysLinktoLastBuild:false,
+                  KeepAll:false,
+                  reportDir:'.', 
+                  reportFiles:'index.html',
+                  reportName:'MY HTML PAGE'
+                ])
             }
         }
-        stage('Execute') {
-            steps {
-                echo 'Executing'
-                bat 'java Hello'
-            }
-        }
-    }
-    post{
-        success{
-            echo 'Pipeline built Successfully'
-        }
-        failure{
-            echo 'Pipeline built failed'
-        }
-    }
+    }  
 }
